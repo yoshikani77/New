@@ -10,6 +10,7 @@ namespace Game1.model
 {
     public class Animation
     {
+
         public int CurrentFrame { get; set; }
 
 

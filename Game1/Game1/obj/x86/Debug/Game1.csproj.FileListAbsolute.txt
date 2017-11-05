@@ -26,3 +26,5 @@ C:\Users\Administrator\source\repos\Game1\Game1\bin\Windows\x86\Debug\Content\Wa
 C:\Users\Administrator\source\repos\Game1\Game1\bin\Windows\x86\Debug\Content\WalkingLeft.xnb
 C:\Users\Administrator\source\repos\Game1\Game1\bin\Windows\x86\Debug\Content\WalkingRight.xnb
 C:\Users\Administrator\source\repos\Game1\Game1\bin\Windows\x86\Debug\Content\WalkingUp.xnb
+C:\Users\Administrator\source\repos\Game1\Game1\bin\Windows\x86\Debug\Content\Controls\button.xnb
+C:\Users\Administrator\source\repos\Game1\Game1\bin\Windows\x86\Debug\Content\Fonts\font.xnb

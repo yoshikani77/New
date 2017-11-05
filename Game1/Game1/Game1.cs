@@ -1,9 +1,12 @@
-﻿using Game1.model;
+﻿using Game1.Controls;
+using Game1.model;
 using Game1.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Content;
 
 namespace Game1
 {
@@ -14,6 +17,10 @@ namespace Game1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        private Color _backgroundColor = Color.CornflowerBlue;
+
+        private List<Component> _gameComponets;
 
         private List<Sprite> _sprites;
 
@@ -31,7 +38,7 @@ namespace Game1
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            IsMouseVisible = true;
 
             base.Initialize();
         }
@@ -42,6 +49,39 @@ namespace Game1
         /// </summary>
         protected override void LoadContent()
         {
+            spriteBatch = new SpriteBatch(GraphicsDevice);//????
+
+            var randomButton = new Button(Content.Load<Texture2D>("Controls/Button"), Content.Load<SpriteFont>("Fonts/Font"))
+            {
+                Position = new Vector2(250,200),
+                Text = "Random",
+            };
+
+            randomButton.Click += RandomButton_Click;
+
+            // spriteBatch = new SpriteBatch(GraphicsDevice);//????
+
+            var quitButton = new Button(Content.Load<Texture2D>("Controls/Button"), Content.Load<SpriteFont>("Fonts/Font"))
+            {
+                Position = new Vector2(250,250),
+                Text = "Quit",
+            };
+
+            quitButton.Click += QuitButton_Click;
+           
+
+            _gameComponets = new List<Component>()
+            {
+                randomButton,
+                quitButton,
+                
+            };  
+
+
+
+
+            /*
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -68,6 +108,7 @@ namespace Game1
                 },
 
 
+               
 
 
 
@@ -92,13 +133,19 @@ namespace Game1
                 }
             };
 
-
-
-
-
-
-
+            */
         }
+        private void RandomButton_Click(object sender, System.EventArgs e)
+        {
+            var random = new Random();
+
+            _backgroundColor = new Color(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
+        }
+        private void QuitButton_Click(object sender, System.EventArgs e)
+        {
+            Exit();
+        }
+
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -116,6 +163,8 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            foreach (var component in _gameComponets)
+                component.Update(gameTime);
 
             foreach (var sprite in _sprites)
                 sprite.Update(gameTime, _sprites);
@@ -130,9 +179,14 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(_backgroundColor);
 
             spriteBatch.Begin();
+
+            foreach (var component in _gameComponets)
+               component.Draw(gameTime,spriteBatch);
+
+
 
             foreach (var sprite in _sprites)
                 sprite.Draw(spriteBatch);
