@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Game1.manager
 {
+
     class AnimationManager
     {
         private Animation _animation;
