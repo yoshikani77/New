@@ -15,6 +15,5 @@ namespace Game1.model
         public Keys Up { get; set; }
 
 
-
     }
 }
